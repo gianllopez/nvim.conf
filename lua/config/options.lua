@@ -18,5 +18,8 @@ vim.opt.wrap = false
 -- [`gianllopez/neovim.conf`]: confirm before quit on unsaved files
 vim.opt.confirm = true
 
+-- [`gianllopez/neovim.conf`]: adjust the delay to detect key sequence completion
+vim.o.timeoutlen = 500
+
 -- [`akinsho/bufferline.nvim`]: requirement for plugin usage
 vim.opt.termguicolors = true
