@@ -13,8 +13,12 @@ return {
 						"pyright",
 						-- typescript
 						"vtsls",
+						-- typescript, javascript
+						"eslint-lsp",
 						-- tailwindcss
 						"tailwindcss-language-server",
+						-- sass
+						"some-sass-language-server",
 					},
 				},
 			},
@@ -59,8 +63,12 @@ return {
 				},
 				-- typescript
 				vtsls = {},
+				-- typescript, javascript
+				eslint = {},
 				-- tailwindcss
 				tailwindcss = {},
+				-- sass
+				somesass_ls = {},
 			},
 		},
 		config = function(_, opts)

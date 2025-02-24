@@ -12,6 +12,7 @@ return {
 				"lua",
 				"typescript",
 				"tsx",
+				"htmldjango",
 				"dockerfile",
 			},
 		},

@@ -42,6 +42,8 @@ return {
 							-- [`nvim-tree/nvim-tree.lua`]
 							{ event = "notify", find = "was properly removed" },
 							{ event = "notify", find = "was properly created" },
+							{ event = "notify", find = "added to clipboard" },
+							{ event = "notify", find = "->" },
 							-- [`neovim/nvim-lspconfig`]
 							{ event = "notify", find = "No information available" },
 						},

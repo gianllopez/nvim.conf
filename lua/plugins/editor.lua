@@ -6,7 +6,18 @@ return {
 			filters = {
 				dotfiles = true,
 				custom = { "^%.venv%..*", "node_modules" },
-				exclude = { "%.env$", "%.env%..*", "%.prettierrc%.yml", "%.gitignore", "%.dockerignore" },
+				exclude = {
+					-- environment
+					"%.env$",
+					"%.env%..*",
+					-- git
+					"%.gitignore",
+					-- javascript, typescript
+					"%.prettierrc%.yml",
+					"%.eslintrc.js",
+					-- docker
+					"%.dockerignore",
+				},
 			},
 			sort = { sorter = "filetype" },
 			view = { adaptive_size = true },

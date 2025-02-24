@@ -8,11 +8,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	pattern = "python",
 	callback = function(args)
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
-
 		if client == nil then
 			return
 		end
-
 		if client.name == "ruff" then
 			client.server_capabilities.hoverProvider = false
 		end
