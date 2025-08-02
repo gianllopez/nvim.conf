@@ -103,7 +103,7 @@ map("n", "<leader>nd", "<Cmd>Noice dismiss<CR>", { noremap = true, nowait = true
 -- [`nvim-tree/nvim-tree.lua`]: toggle the file explorer
 map("n", "<leader>fe", "<Cmd>NvimTreeToggle<CR>", { noremap = true, nowait = true })
 
--- [`nvim-tree/nvim-tree.lua`]: focues the file explorer
+-- [`nvim-tree/nvim-tree.lua`]: focus the file explorer
 map("n", "fe", "<Cmd>NvimTreeFocus<CR>", { noremap = true })
 
 -- [`ibhagwan/fzf-lua`]: find files
@@ -119,6 +119,7 @@ map("n", "<leader>fr", "<Cmd>FzfLua resume<CR>", { noremap = true, nowait = true
 map("n", "s", function()
 	require("flash").jump()
 end, { noremap = true })
+
 -- [`folke/flash.nvim`]: run in current buffer using treesitter
 map("n", "S", function()
 	require("flash").treesitter()
