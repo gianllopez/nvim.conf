@@ -28,9 +28,6 @@ return {
 				opts = {
 					keymap = { preset = "super-tab" },
 				},
-				dependencies = {
-					{ "rafamadriz/friendly-snippets" },
-				},
 			},
 		},
 		opts = {
