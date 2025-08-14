@@ -1,0 +1,13 @@
+{
+  "@react/rfc": {
+    "prefix": "rfc",
+    "description": "React functional componente with its type-safe props",
+    "body": [
+			"type Props = {};",
+			"",
+			"export function $1({}: Props) {",
+			"\treturn <p>Hello from `$1`</p>;",
+			"}"
+    ]
+  }
+}

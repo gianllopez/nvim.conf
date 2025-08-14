@@ -1,0 +1,22 @@
+{
+  "@git/gcm": {
+    "prefix": "gcm",
+    "description": "Commit message based on convention",
+    "body": [
+      "${1|feat,fix,docs,style,refactor,perf,test,build,ci,chore,revert|}($2): ${3:summary}",
+      "",
+      "${4:description}"
+    ]
+  },
+	"@git/gcmr": {
+    "prefix": "gcmr",
+    "description": "Commit message based on convention and issues references",
+    "body": [
+      "${1|feat,fix,docs,style,refactor,perf,test,build,ci,chore,revert|}($2): ${3:summary}",
+      "",
+      "${4:description}",
+      "",
+      "${5:references}"
+    ]
+  }
+}
