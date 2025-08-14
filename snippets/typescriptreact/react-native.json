@@ -1,0 +1,19 @@
+{
+  "@react-native/rnfc": {
+    "prefix": "rnfc",
+    "description": "React Native functional componente with its type-safe props",
+    "body": [
+			"import { Text, View } from 'react-native';",
+			"",
+			"type Props = {};",
+			"",
+			"export function $1({}: Props) {",
+			"\treturn (",
+			"\t\t<View>",
+			"\t\t\t<Text>Hello from `$1`</Text>",
+			"\t\t</View>",
+			"\t);",
+			"}"
+    ]
+  }
+}

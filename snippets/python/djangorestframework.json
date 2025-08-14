@@ -1,0 +1,28 @@
+{
+	"@python/djangorestframework/drfs": {
+    "prefix": "drfs",
+		"description": "Create a Django REST Framework serializer",
+    "body": [
+			"from rest_framework import serializers",
+			"",
+			"",
+			"class $1(serializers.Serializer):",
+			"\t$2 = serializers.$3()",
+			"\t$4"
+    ]
+  },
+	"@python/djangorestframework/drfv": {
+    "prefix": "drfv",
+		"description": "Create a Django REST Framework view",
+    "body": [
+			"from rest_framework.request import Request",
+			"from rest_framework.response import Response",
+			"from rest_framework.views import APIView",
+			"",
+			"",
+			"class $1(APIView):",
+    	"\tdef get(self, request: Request) -> Response:",
+      "\t\treturn Response(\"Hello world!\")"
+    ]
+  }
+}

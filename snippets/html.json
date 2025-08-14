@@ -1,0 +1,9 @@
+{
+  "@html/acc": {
+    "prefix": "acc",
+    "description": "Add accent entity",
+    "body": [
+			"&$1acute;"
+    ]
+  }
+}

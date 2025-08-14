@@ -1,0 +1,17 @@
+{
+  "@python/django/djm": {
+    "prefix": "djm",
+		"description": "Create a Django model",
+    "body": [
+			"from django.db import models",
+			"",
+			"",
+			"class $1(models.Model):",
+			"\t$2 = models.$3()",
+			"\t$4",
+			"",
+			"\tdef __str__(self) -> str:",
+			"\t\treturn self.$2"
+    ]
+  }
+}

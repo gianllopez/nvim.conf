@@ -1,0 +1,20 @@
+{
+  "name": "snippets",
+  "contributes": {
+    "snippets": [
+      { "language": "python", "path": "./python/python.json" },
+      { "language": "python", "path": "./python/django.json" },
+      { "language": "python", "path": "./python/djangorestframework.json" },
+
+      { "language": "gitcommit", "path": "./gitcommit.json" },
+
+      { "language": ["html", "typescriptreact"], "path": "./html.json" },
+
+      { "language": ["javascript", "typescriptreact"], "path": "./javascript.json" },
+
+      { "language": "typescriptreact", "path": "./typescriptreact/react.json" },
+      { "language": "typescriptreact", "path": "./typescriptreact/react-native.json" },
+      { "language": "typescriptreact", "path": "./typescriptreact/react-query-kit.json" }
+    ]
+  }
+}
