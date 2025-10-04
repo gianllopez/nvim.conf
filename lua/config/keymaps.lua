@@ -106,6 +106,16 @@ map("n", "<leader>fe", "<Cmd>NvimTreeToggle<CR>", { noremap = true, nowait = tru
 -- [`nvim-tree/nvim-tree.lua`]: focus the file explorer
 map("n", "fe", "<Cmd>NvimTreeFocus<CR>", { noremap = true })
 
+-- [`nvim-tree/nvim-tree.lua`]: save marks
+map("n", "fesm", function()
+	require("custom.zenmarks").save()
+end, { noremap = true })
+
+-- [`nvim-tree/nvim-tree.lua`]: load saved marks
+map("n", "felm", function()
+	require("custom.zenmarks").load()
+end, { noremap = true })
+
 -- [`ibhagwan/fzf-lua`]: find files
 map("n", "<leader>ff", "<Cmd>FzfLua files<CR>", { noremap = true, nowait = true })
 

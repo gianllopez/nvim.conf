@@ -1,7 +1,7 @@
 {
   "@react-native/rnfc": {
     "prefix": "rnfc",
-    "description": "React Native functional componente with its type-safe props",
+    "description": "React Native functional component with its type-safe props",
     "body": [
 			"import { Text, View } from 'react-native';",
 			"",
@@ -11,6 +11,21 @@
 			"\treturn (",
 			"\t\t<View>",
 			"\t\t\t<Text>Hello from `$1`</Text>",
+			"\t\t</View>",
+			"\t);",
+			"}"
+    ]
+  },
+	"@react-native/rns": {
+    "prefix": "rns",
+    "description": "React Native screen component",
+    "body": [
+			"import { View, Text } from 'react-native';",
+			"",
+			"export default function $1Screen() {",
+			"\treturn (",
+			"\t\t<View className=\"flex-1 items-center justify-center\">",
+			"\t\t\t<Text>Hello from `$1Screen`</Text>",
 			"\t\t</View>",
 			"\t);",
 			"}"

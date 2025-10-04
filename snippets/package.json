@@ -12,9 +12,10 @@
 
       { "language": ["javascript", "typescriptreact"], "path": "./javascript.json" },
 
+      { "language": "typescript", "path": "./typescriptreact/react-query-kit.json" },
+
       { "language": "typescriptreact", "path": "./typescriptreact/react.json" },
-      { "language": "typescriptreact", "path": "./typescriptreact/react-native.json" },
-      { "language": "typescriptreact", "path": "./typescriptreact/react-query-kit.json" }
+      { "language": "typescriptreact", "path": "./typescriptreact/react-native.json" }
     ]
   }
 }
