@@ -4,14 +4,17 @@
 		"description": "Create a Django model",
     "body": [
 			"from django.db import models",
+			"from django.utils.translation import gettext_lazy as _",
 			"",
 			"",
 			"class $1(models.Model):",
-			"\t$2 = models.$3()",
 			"\t$4",
+			"\tclass Meta:",
+			"\t\tverbose_name = _(\"$2\")",
+			"\t\tverbose_name_plural = _(\"$3\")",
 			"",
 			"\tdef __str__(self) -> str:",
-			"\t\treturn self.$2"
+			"\t\treturn \"Hello from $1\""
     ]
   }
 }
