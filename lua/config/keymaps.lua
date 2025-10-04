@@ -106,6 +106,84 @@ map("n", "<leader>fe", "<Cmd>NvimTreeToggle<CR>", { noremap = true, nowait = tru
 -- [`nvim-tree/nvim-tree.lua`]: focus the file explorer
 map("n", "fe", "<Cmd>NvimTreeFocus<CR>", { noremap = true })
 
+-- [`nvim-tree/nvim-tree.lua`]: save marks
+map("n", "fesm", function()
+	local api = require("nvim-tree.api")
+	local marks = api.marks.list()
+	local cwd = vim.fn.getcwd()
+
+	local paths = {}
+
+	if #marks == 0 then
+		vim.notify("There is no marks to save", vim.log.levels.WARN, {
+			title = "`nvim-tree.lua` marks persistence",
+			icon = "⚠️",
+		})
+	end
+
+	for _, node in ipairs(marks) do
+		table.insert(paths, node.absolute_path)
+	end
+
+	local output_dir = vim.fn.stdpath("data") .. "/nvim-tree-marks"
+	local output_cwd = vim.fn.fnamemodify(cwd, ":t")
+	local output_file = string.format("%s/%s.json", output_dir, project_name)
+	local output = vim.fn.stdpath("data") .. "/lazy/nvim-tree.lua/marks.json"
+	local file = io.open(output, "w")
+
+	vim.fn.mkdir(output_dir, "p")
+
+	if file then
+		local content = vim.fn.json_encode(paths)
+
+		file:write(content)
+		file:close()
+
+		vim.notify("Marks were saved successfully", vim.log.levels.INFO, {
+			title = "`nvim-tree.lua` marks persistence",
+			icon = "✅",
+		})
+	end
+end, { noremap = true })
+
+-- [`nvim-tree/nvim-tree.lua`]: load saved marks
+map("n", "felm", function()
+	local api = require("nvim-tree.api")
+	local lib = require("nvim-tree.lib")
+	local output = vim.fn.stdpath("data") .. "/lazy/nvim-tree.lua/marks.json"
+	local file = io.open(output, "r")
+
+	if not file then
+		vim.notify("There is an error with marks file", vim.log.levels.ERROR, {
+			title = "`nvim-tree.lua` marks persistence",
+			icon = "❌",
+		})
+		return
+	end
+
+	local content = file:read("*a")
+
+	file:close()
+
+	local loaded, paths = pcall(vim.fn.json_decode, content)
+
+	if not loaded then
+		vim.notify("There is an error loading marks", vim.log.levels.ERROR, {
+			title = "`nvim-tree.lua` marks persistence",
+			icon = "❌",
+		})
+		return
+	end
+
+	for _, path in ipairs(paths) do
+		api.tree.find_file({ buf = path, open = true, focus = true })
+		local node = api.tree.get_node_under_cursor()
+		if node then
+			api.marks.toggle(node)
+		end
+	end
+end, { noremap = true })
+
 -- [`ibhagwan/fzf-lua`]: find files
 map("n", "<leader>ff", "<Cmd>FzfLua files<CR>", { noremap = true, nowait = true })
 

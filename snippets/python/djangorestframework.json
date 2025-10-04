@@ -11,18 +11,46 @@
 			"\t$4"
     ]
   },
-	"@python/djangorestframework/drfv": {
-    "prefix": "drfv",
-		"description": "Create a Django REST Framework view",
+	"@python/djangorestframework/drfms": {
+    "prefix": "drfms",
+		"description": "Create a Django REST Framework model serializer",
     "body": [
-			"from rest_framework.request import Request",
-			"from rest_framework.response import Response",
-			"from rest_framework.views import APIView",
+			"from rest_framework.serializers import ModelSerializer",
 			"",
 			"",
-			"class $1(APIView):",
-    	"\tdef get(self, request: Request) -> Response:",
-      "\t\treturn Response(\"Hello world!\")"
+			"class $1(ModelSerializer):",
+			"\tclass Meta:",
+			"\t\tmodel = $2",
+			"\t\tfields = \"__all__\""
+    ]
+  },
+	"@python/djangorestframework/drfcv": {
+    "prefix": "drfcv",
+		"description": "Create a Django REST Framework create view",
+    "body": [
+			"from rest_framework.generics import CreateAPIView",
+			"",
+			"from ${1:app.foo.models} import ${2:Model}",
+			"from ${3:app.foo.serializer} import ${4:Serializer}",
+			"",
+			"",
+			"class $2CreateAPIView(CreateAPIView):",
+    	"\tserializer_class = $4"
+    ]
+  },
+	"@python/djangorestframework/drflv": {
+    "prefix": "drflv",
+		"description": "Create a Django REST Framework list view",
+    "body": [
+			"from rest_framework.generics import ListAPIView",
+			"",
+			"from ${1:app.foo.models} import ${2:Model}",
+			"from ${3:app.foo.serializer} import ${4:Serializer}",
+			"",
+			"",
+			"class $2ListAPIView(ListAPIView):",
+    	"\tqueryset = $2.objects.all()",
+    	"\tserializer_class = $4"
     ]
   }
 }

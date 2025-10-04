@@ -5,12 +5,16 @@
     "body": [
 			"import { createQuery } from 'react-query-kit';",
 			"",
-			"export const $1 = createQuery<$3>({",
+			"type QueryResponse = any;",
+			"",
+			"type QueryData = any;",
+			"",
+			"export const $1 = createQuery<QueryData>({",
 			"\tqueryKey: ['$2'],",
 			"\tfetcher: () => request()",
 			"});",
 			"",
-			"const request = () => {$4};"
+			"const request = async () => {$4};"
     ]
   }
 }
