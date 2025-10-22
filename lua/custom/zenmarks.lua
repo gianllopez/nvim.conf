@@ -11,7 +11,7 @@ vim.fn.mkdir(output_folder, "p")
 function M.save()
 	local marks = api.marks.list()
 
-	if not marks then
+	if marks == nil then
 		vim.notify("There is no marks to save", vim.log.levels.WARN, {
 			title = "`zenmarks` persistence",
 			icon = "⚠️",

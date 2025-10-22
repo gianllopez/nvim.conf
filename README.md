@@ -40,10 +40,12 @@ And paste the following configuration:
 
 
 ```toml
-format = "$directory$git_branch$git_status$python"
+add_newline = false
+
+format = "$directory$git_branch$git_status$python->"
 
 [python]
-format = "(and \\[$virtualenv\\])"
+format = "(and \\[$virtualenv\\] )"
 
 [battery]
 disabled = true
