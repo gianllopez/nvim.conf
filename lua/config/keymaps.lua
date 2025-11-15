@@ -135,8 +135,8 @@ map("n", "S", function()
 	require("flash").treesitter()
 end, { noremap = true })
 
--- [`folke/trouble.nvim`]: open the picker
-map("n", "<leader>tro", "<Cmd>Trouble<CR>", { noremap = true, nowait = true })
+-- [`folke/trouble.nvim`]: toggle diagnostics for the current buffer
+map("n", "<leader>tro", "<Cmd>Trouble diagnostics toggle filter.buf=0<CR>", { noremap = true, nowait = true })
 
 -- [`smjonas/inc-rename.nvim`]: execute the renaming feature
 map("n", "<leader>cr", function()
