@@ -6,7 +6,7 @@
 			"type Props = {};",
 			"",
 			"export function $1({}: Props) {",
-			"\treturn <p>Hello from `$1`</p>;",
+			"\treturn <$2>Hello from `$1`</$2>;",
 			"}"
     ]
   },

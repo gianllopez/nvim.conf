@@ -1,4 +1,10 @@
+-- This file configures the User Interface (UI) components: status line,
+-- buffer bar, notifications, and indentation guides. It aims to provide a
+-- clean and modern visual experience.
+-- by @gianllopez (2025)
+
 return {
+	-- Show open buffers as tabs at the top
 	{
 		"akinsho/bufferline.nvim",
 		version = "*",
@@ -17,6 +23,8 @@ return {
 			},
 		},
 	},
+
+	-- The status line at the bottom
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = {
@@ -24,6 +32,8 @@ return {
 		},
 		opts = {},
 	},
+
+	-- Replaces the UI for messages, cmdline and the popupmenu
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
@@ -53,6 +63,8 @@ return {
 			},
 		},
 	},
+
+	-- Adds indentation guides to all lines
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",

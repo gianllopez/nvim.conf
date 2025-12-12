@@ -1,3 +1,8 @@
+-- This module implements a "discipline" mode to train muscle memory. It
+-- warns the user when they spam navigation keys (h, j, k, l, w, b)
+-- excessively, encouraging more efficient movement commands.
+-- by @gianllopez (2025)
+
 local M = {}
 
 function M.ninja()
@@ -7,7 +12,7 @@ function M.ninja()
 
 	for _, key in ipairs(keys) do
 		local count = 0
-		local timer = assert(vim.loop.new_timer())
+		local timer = assert(vim.uv.new_timer())
 		local map = key
 
 		vim.keymap.set("n", key, function()

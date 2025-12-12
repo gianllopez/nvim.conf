@@ -11,10 +11,10 @@
 			"",
 			"export const $1 = createQuery<QueryData>({",
 			"\tqueryKey: ['$2'],",
-			"\tfetcher: () => request()",
+			"\tfetcher: request",
 			"});",
 			"",
-			"const request = async () => {$4};"
+			"function request () {$4};"
     ]
   }
 }
