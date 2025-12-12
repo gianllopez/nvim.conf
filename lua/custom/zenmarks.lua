@@ -1,76 +1,81 @@
+-- This module provides persistence for Nvim-Tree "marks" (bookmarks). It
+-- saves the marked files to a local file in the current project directory.
+-- REMEMBER: Add '.zenmarks.json' to your .gitignore file.
+-- by @gianllopez (2025)
+
 local M = {}
 
 local api = require("nvim-tree.api")
 
-local output_folder = vim.fn.stdpath("data") .. "/zenmarks"
-local output_hash = vim.fn.sha256(vim.fn.getcwd())
-local output_path = string.format("%s/%s.json", output_folder, output_hash)
-
-vim.fn.mkdir(output_folder, "p")
+local output = ".marks.json"
 
 function M.save()
 	local marks = api.marks.list()
 
-	if marks == nil then
-		vim.notify("There is no marks to save", vim.log.levels.WARN, {
-			title = "`zenmarks` persistence",
+	if not marks or #marks == 0 then
+		vim.notify("There are no marks to save", vim.log.levels.WARN, {
+			title = "zenmarks persistence",
 			icon = "⚠️",
 		})
 		return
 	end
 
-	local output = io.open(output_path, "w")
+	local path = vim.fn.getcwd() .. "/" .. output
+	local file = io.open(path, "w")
 
-	if output then
+	if file then
 		local paths = {}
 
 		for _, node in ipairs(marks) do
 			table.insert(paths, node.absolute_path)
 		end
 
-		local json = vim.fn.json_encode(paths)
+		local json = vim.json.encode(paths)
 
-		output:write(json)
-		output:close()
+		file:write(json)
+		file:close()
 
-		vim.notify("Marks were saved successfully", vim.log.levels.INFO, {
-			title = "`zenmarks` persistence",
+		vim.notify("Marks saved to `" .. output .. "`", vim.log.levels.INFO, {
+			title = "zenmarks persistence",
 			icon = "✅",
 		})
 	end
 end
 
 function M.load()
-	local output = io.open(output_path, "r")
+	local path = vim.fn.getcwd() .. "/" .. output
+	local file = io.open(path, "r")
 
-	if not output then
-		vim.notify("There is an error with marks file", vim.log.levels.ERROR, {
-			title = "`zenmarks` persistence",
+	if not file then
+		return
+	end
+
+	local content = file:read("*a")
+	file:close()
+
+	local ok, paths = pcall(vim.json.decode, content)
+
+	if not ok then
+		vim.notify("Error parsing `" .. output .. "`", vim.log.levels.ERROR, {
+			title = "zenmarks persistence",
 			icon = "❌",
 		})
 		return
 	end
 
-	local marks = output:read("*a")
-
-	output:close()
-	local loaded, paths = pcall(vim.fn.json_decode, marks)
-
-	if not loaded then
-		vim.notify("There is an error loading the marks", vim.log.levels.ERROR, {
-			title = "`zenmarks` persistence",
-			icon = "❌",
-		})
-		return
-	end
-
-	for _, path in ipairs(paths) do
-		api.tree.find_file({ buf = path, open = true, focus = true })
+	for _, p in ipairs(paths) do
+		api.tree.find_file({ buf = p, open = true, focus = true })
 		local node = api.tree.get_node_under_cursor()
+
 		if node then
 			api.marks.toggle(node)
 		end
 	end
+
+	vim.notify("Marks loaded from `" .. output .. "`", vim.log.levels.INFO, {
+		title = "zenmarks persistence",
+		icon = "🔖",
+	})
 end
 
 return M

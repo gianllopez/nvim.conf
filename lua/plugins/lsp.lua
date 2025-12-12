@@ -1,77 +1,69 @@
+-- This file configures the Language Server Protocol (LSP). It manages the
+-- downloading of language servers via Mason, connects them to Neovim via
+-- lspconfig, and integrates the Blink completion engine.
+-- by @gianllopez (2025)
+
 return {
 	{
 		"neovim/nvim-lspconfig",
 		event = "FileType",
 		dependencies = {
+			-- Package manager for LSP servers, DAP servers, linters, and formatters
 			{
 				"williamboman/mason.nvim",
 				opts = {
 					ensure_installed = {
-						-- lua
 						"lua-language-server",
-						-- python
-						"pyright",
-						-- typescript
-						"vtsls",
-						-- typescript, javascript
+						"pyright", -- Type checking for Python
+						"ruff", -- Linter/Formatter for Python
+						"vtsls", -- Advanced TypeScript wrapper
 						"eslint-lsp",
-						-- tailwindcss
 						"tailwindcss-language-server",
-						-- sass
-						"some-sass-language-server",
+						"somesass-language-server",
 					},
 				},
 			},
+			-- Ultra-fast completion engine based on Rust
 			{
 				"saghen/blink.cmp",
 				version = "v0.*",
 				opts = {
 					keymap = { preset = "super-tab" },
+					sources = {
+						default = { "lsp", "path", "snippets", "buffer" },
+					},
 				},
 			},
 		},
 		opts = {
 			servers = {
-				-- lua
 				lua_ls = {
 					settings = {
 						Lua = {
-							diagnostics = {
-								globals = { "vim" },
-							},
+							diagnostics = { globals = { "vim" } },
 						},
 					},
 				},
-				-- python
 				ruff = {},
 				pyright = {
 					settings = {
 						pyright = {
-							-- using `ruff` for organize imports
 							disableOrganizeImports = true,
-						},
-						python = {
-							analysis = {
-								-- ignore all files for analysis to use `ruff` for linting
-								ignore = { "*" },
-							},
 						},
 					},
 				},
-				-- typescript
 				vtsls = {},
-				-- typescript, javascript
 				eslint = {},
-				-- tailwindcss
 				tailwindcss = {},
-				-- sass
 				somesass_ls = {},
 			},
 		},
 		config = function(_, opts)
+			local blink = require("blink.cmp")
 			for server, config in pairs(opts.servers) do
-				config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
-				vim.lsp.enable(server, config)
+				config.capabilities = blink.get_lsp_capabilities(config.capabilities)
+				vim.lsp.config[server] = config
+				vim.lsp.enable(server)
 			end
 		end,
 	},
