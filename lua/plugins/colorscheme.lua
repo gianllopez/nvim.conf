@@ -5,10 +5,10 @@
 
 return {
 	{
-		"Mofiqul/dracula.nvim",
+		"rebelot/kanagawa.nvim",
 		priority = 1000,
 		config = function()
-			vim.cmd.colorscheme("dracula")
+			vim.cmd.colorscheme("kanagawa")
 		end,
 	},
 }

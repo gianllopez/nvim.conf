@@ -26,7 +26,7 @@ return {
 			-- Ultra-fast completion engine based on Rust
 			{
 				"saghen/blink.cmp",
-				version = "v0.*",
+				version = "1.*",
 				opts = {
 					keymap = { preset = "super-tab" },
 					sources = {
