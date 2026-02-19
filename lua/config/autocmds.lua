@@ -20,6 +20,15 @@ autocmd("LspAttach", {
 	end,
 })
 
+-- [`nvim-treesitter/nvim-treesitter`]: start `nvim-treesitter/nvim-treesitter` highlighting for any filetype
+autocmd("FileType", {
+	group = general,
+	pattern = { "*" },
+	callback = function()
+		pcall(vim.treesitter.start)
+	end,
+})
+
 -- [`gianllopez/neovim.conf`]: highlight text on yank
 autocmd("TextYankPost", {
 	group = general,
