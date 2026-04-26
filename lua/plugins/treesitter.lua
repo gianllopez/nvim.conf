@@ -47,7 +47,6 @@ return {
 	-- Auto close tags
 	{
 		"windwp/nvim-ts-autotag",
-		event = { "BufReadPost", "BufNewFile" },
 		opts = {},
 	},
 }

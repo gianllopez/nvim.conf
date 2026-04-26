@@ -112,6 +112,7 @@ return {
 				{
 					mode = { "n", "v" },
 					-- Groups
+					{ "<leader>a", group = "audit" },
 					{ "<leader>b", group = "buffer" },
 					{ "<leader>c", group = "code/rename" },
 					{ "<leader>f", group = "file/find" },
@@ -157,20 +158,6 @@ return {
 					-- Explorer Mappings
 					{ "fe", group = "explorer" },
 					{ "fe", "<cmd>NvimTreeFocus<cr>", desc = "Focus Tree" },
-					{
-						"fesm",
-						function()
-							require("custom.zenmarks").save()
-						end,
-						desc = "Save Marks",
-					},
-					{
-						"felm",
-						function()
-							require("custom.zenmarks").load()
-						end,
-						desc = "Load Marks",
-					},
 
 					-- Editing
 					{ "ri", group = "replace" },
@@ -247,6 +234,27 @@ return {
 					{ "<leader>sv", "<cmd>vsplit<cr>", desc = "Split Vertical" },
 					{ "<leader>sh", "<C-w>h", desc = "Window Left" },
 					{ "<leader>tro", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics" },
+					{
+						"<leader>as",
+						function()
+							require("custom.audit").open()
+						end,
+						desc = "Set current file status",
+					},
+					{
+						"<leader>af",
+						function()
+							require("custom.audit").filter()
+						end,
+						desc = "Filter files by status",
+					},
+					{
+						"<leader>ah",
+						function()
+							require("custom.audit").history()
+						end,
+						desc = "File status history",
+					},
 					{ "<leader>nd", "<cmd>Noice dismiss<cr>", desc = "Dismiss Notifications" },
 					{ "<leader>l", "<cmd>Lazy<cr>", desc = "Lazy", icon = "💤" },
 				},
