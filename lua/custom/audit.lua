@@ -120,6 +120,8 @@ function M.filter()
 				end
 			end
 
+			table.sort(files)
+
 			if #files == 0 then
 				vim.notify("No files with status `" .. item.id .. "`", vim.log.levels.WARN, { title = "Audit" })
 				return
@@ -127,9 +129,10 @@ function M.filter()
 
 			require("fzf-lua").fzf_exec(files, {
 				prompt = item.icon .. "  ",
-				cwd = root,
 				actions = {
-					["default"] = require("fzf-lua").actions.file_edit,
+					["default"] = function(selected)
+						vim.cmd("edit " .. vim.fn.fnameescape(root .. "/" .. selected[1]))
+					end,
 				},
 			})
 		end,

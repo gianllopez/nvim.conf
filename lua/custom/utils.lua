@@ -7,10 +7,13 @@ local M = {}
 local DATA = vim.fn.stdpath("data") .. "/audit"
 
 function M.root()
-	local git = vim.fn.finddir(".git", vim.fn.expand("%:p:h") .. ";")
+	local matches = vim.fs.find(".git", {
+		upward = true,
+		path = vim.fn.expand("%:p:h"),
+	})
 
-	if git ~= "" then
-		return vim.fn.fnamemodify(git, ":h")
+	if matches[1] then
+		return vim.fs.dirname(matches[1])
 	end
 
 	return vim.fn.getcwd()
