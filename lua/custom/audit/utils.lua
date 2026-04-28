@@ -32,30 +32,30 @@ function M.path(root)
 end
 
 function M.read(path)
-	local f = io.open(path, "r")
+	local file = io.open(path, "r")
 
-	if not f then
+	if not file then
 		return {}
 	end
 
-	local content = f:read("*a")
+	local content = file:read("*a")
 
-	f:close()
+	file:close()
 
 	return vim.json.decode(content) or {}
 end
 
 function M.write(path, db)
-	local f = io.open(path, "w")
+	local file = io.open(path, "w")
 
-	if not f then
+	if not file then
 		vim.notify("audit: could not write " .. path, vim.log.levels.ERROR, { title = "Audit" })
 		return
 	end
 
-	f:write(vim.json.encode(db))
+	file:write(vim.json.encode(db))
 
-	f:close()
+	file:close()
 end
 
 function M.entry()
@@ -83,6 +83,11 @@ function M.save(status)
 	local path = M.path(root)
 	local database = M.read(path)
 	local entry = database[file] or { history = {} }
+
+	if entry.status == status then
+		return false
+	end
+
 	local now = os.date("!%Y-%m-%dT%H:%M:%SZ")
 
 	table.insert(entry.history, { status = status, at = now })
@@ -92,6 +97,8 @@ function M.save(status)
 	database[file] = entry
 
 	M.write(path, database)
+
+	return true
 end
 
 return M

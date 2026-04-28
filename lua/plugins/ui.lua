@@ -26,7 +26,18 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {},
+		opts = {
+			sections = {
+				lualine_x = {
+					function()
+						return require("custom.audit").status()
+					end,
+					"encoding",
+					"fileformat",
+					"filetype",
+				},
+			},
+		},
 	},
 
 	-- Replaces the UI for messages, cmdline and the popupmenu

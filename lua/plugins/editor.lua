@@ -255,6 +255,20 @@ return {
 						end,
 						desc = "File status history",
 					},
+					{
+						"<leader>ap",
+						function()
+							require("custom.audit").bulk_set_as_pending()
+						end,
+						desc = "Mark all files as `pending`",
+					},
+					{
+						"<leader>ac",
+						function()
+							require("custom.audit").bulk_set_last_commit_as_review()
+						end,
+						desc = "Mark last commit files as `review`",
+					},
 					{ "<leader>nd", "<cmd>Noice dismiss<cr>", desc = "Dismiss Notifications" },
 					{ "<leader>l", "<cmd>Lazy<cr>", desc = "Lazy", icon = "💤" },
 				},
