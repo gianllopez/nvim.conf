@@ -36,3 +36,43 @@ autocmd("TextYankPost", {
 		vim.hl.on_yank()
 	end,
 })
+
+-- [`custom/audit`]: remove deleted files from audit registry
+autocmd("BufDelete", {
+	group = general,
+	callback = function(ev)
+		local bufname = vim.api.nvim_buf_get_name(ev.buf)
+
+		if bufname == "" or vim.fn.filereadable(bufname) == 1 then
+			return
+		end
+
+		local matches = vim.fs.find(".git", {
+			upward = true,
+			path = vim.fn.fnamemodify(bufname, ":h"),
+		})
+
+		local root = matches[1] and vim.fs.dirname(matches[1]) or vim.fn.getcwd()
+		local rel = bufname:sub(#root + 2)
+
+		if rel == "" then
+			return
+		end
+
+		local utils = require("custom.audit.utils")
+		local constants = require("custom.audit.constants")
+
+		local path = utils.path(root)
+		local database = utils.read(path)
+
+		if database[rel] then
+			local icon = constants.STATUSES[database[rel].status].icon
+
+			database[rel] = nil
+
+			utils.write(path, database)
+
+			vim.notify("`" .. rel .. "` removed from audit (" .. icon .. ")", vim.log.levels.INFO, { title = "Audit" })
+		end
+	end,
+})

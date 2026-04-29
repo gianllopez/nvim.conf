@@ -5,15 +5,10 @@
 local M = {}
 
 local utils = require("custom.audit.utils")
+local constants = require("custom.audit.constants")
 
 local Menu = require("nui.menu")
 local Popup = require("nui.popup")
-
-local ICONS = {
-	pending = "⏳",
-	review = "🔍",
-	done = "✅",
-}
 
 local function bulk_set(files, status)
 	local root = utils.root()
@@ -61,9 +56,18 @@ function M.open()
 		},
 	}, {
 		lines = {
-			Menu.item(" " .. ICONS.pending .. " -> Pending", { id = "pending", icon = ICONS.pending }),
-			Menu.item(" " .. ICONS.review .. " -> In review", { id = "review", icon = ICONS.review }),
-			Menu.item(" " .. ICONS.done .. " -> Done", { id = "done", icon = ICONS.done }),
+			Menu.item(" " .. constants.STATUSES.pending.icon .. " -> Pending", {
+				id = "pending",
+				icon = constants.STATUSES.pending.icon,
+			}),
+			Menu.item(" " .. constants.STATUSES.review.icon .. " -> In review", {
+				id = "review",
+				icon = constants.STATUSES.review.icon,
+			}),
+			Menu.item(" " .. constants.STATUSES.done.icon .. " -> Done", {
+				id = "done",
+				icon = constants.STATUSES.done.icon,
+			}),
 		},
 		on_submit = function(item)
 			if not utils.save(item.id) then
@@ -95,7 +99,12 @@ function M.history()
 	end
 
 	local lines = vim.tbl_map(function(h)
-		return string.format("  %s  %s  %s", h.at:gsub("T", " "):gsub("Z", ""), ICONS[h.status], h.status)
+		return string.format(
+			"  %s  %s  %s",
+			h.at:gsub("T", " "):gsub("Z", ""),
+			constants.STATUSES[h.status].icon,
+			h.status
+		)
 	end, entry.history)
 
 	local popup = Popup({
@@ -144,9 +153,18 @@ function M.filter()
 		},
 	}, {
 		lines = {
-			Menu.item(" " .. ICONS.pending .. " -> Pending", { id = "pending", icon = ICONS.pending }),
-			Menu.item(" " .. ICONS.review .. " -> In review", { id = "review", icon = ICONS.review }),
-			Menu.item(" " .. ICONS.done .. " -> Done", { id = "done", icon = ICONS.done }),
+			Menu.item(" " .. constants.STATUSES.pending.icon .. " -> Pending", {
+				id = "pending",
+				icon = constants.STATUSES.pending.icon,
+			}),
+			Menu.item(" " .. constants.STATUSES.review.icon .. " -> In review", {
+				id = "review",
+				icon = constants.STATUSES.review.icon,
+			}),
+			Menu.item(" " .. constants.STATUSES.done.icon .. " -> Done", {
+				id = "done",
+				icon = constants.STATUSES.done.icon,
+			}),
 		},
 		on_submit = function(item)
 			local root = utils.root()
@@ -206,7 +224,7 @@ function M.bulk_set_as_pending()
 	local count = bulk_set(files, "pending")
 
 	vim.notify(
-		count .. " file(s) marked as `pending` (" .. ICONS.pending .. ")",
+		count .. " file(s) marked as `pending` (" .. constants.STATUSES.pending.icon .. ")",
 		vim.log.levels.INFO,
 		{ title = "Audit" }
 	)
@@ -242,10 +260,48 @@ function M.bulk_set_last_commit_as_review()
 	local count = bulk_set(files, "review")
 
 	vim.notify(
-		count .. " file(s) marked as `review` (" .. ICONS.review .. ")",
+		count .. " file(s) marked as `review` (" .. constants.STATUSES.review.icon .. ")",
 		vim.log.levels.INFO,
 		{ title = "Audit" }
 	)
+end
+
+function M.clear_file_history()
+	local root = utils.root()
+	local file = utils.relative(root)
+
+	if file == "" then
+		vim.notify("No file open", vim.log.levels.WARN, { title = "Audit" })
+		return
+	end
+
+	if vim.fn.confirm("Clear audit history for `" .. file .. "`?", "&Yes\n&No", 2) ~= 1 then
+		return
+	end
+
+	local entry = utils.entry()
+	local icon = entry and constants.STATUSES[entry.status].icon
+
+	if utils.remove(root) then
+		vim.notify(
+			"Audit history cleared for `" .. file .. "` (" .. icon .. ")",
+			vim.log.levels.INFO,
+			{ title = "Audit" }
+		)
+	else
+		vim.notify("No audit entry found for `" .. file .. "`", vim.log.levels.WARN, { title = "Audit" })
+	end
+end
+
+function M.clean_orphans()
+	local root = utils.root()
+	local count = utils.clean(root)
+
+	if count == 0 then
+		vim.notify("No orphaned entries found", vim.log.levels.INFO, { title = "Audit" })
+	else
+		vim.notify(count .. " orphaned entry(s) removed from audit", vim.log.levels.INFO, { title = "Audit" })
+	end
 end
 
 function M.status()
@@ -255,7 +311,7 @@ function M.status()
 		return ""
 	end
 
-	return ICONS[entry.status] .. " " .. entry.status
+	return constants.STATUSES[entry.status].icon .. " " .. entry.status
 end
 
 return M

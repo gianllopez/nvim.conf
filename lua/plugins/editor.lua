@@ -112,31 +112,97 @@ return {
 				{
 					mode = { "n", "v" },
 					-- Groups
-					{ "<leader>a", group = "audit" },
-					{ "<leader>b", group = "buffer" },
-					{ "<leader>c", group = "code/rename" },
-					{ "<leader>f", group = "file/find" },
-					{ "<leader>n", group = "notifications" },
-					{ "<leader>o", group = "organize" },
-					{ "<leader>s", group = "split/search" },
-					{ "<leader>t", group = "trouble" },
+					{
+						"<leader>a",
+						group = "audit",
+					},
+					{
+						"<leader>b",
+						group = "buffer",
+					},
+					{
+						"<leader>c",
+						group = "code/rename",
+					},
+					{
+						"<leader>f",
+						group = "file/find",
+					},
+					{
+						"<leader>n",
+						group = "notifications",
+					},
+					{
+						"<leader>o",
+						group = "organize",
+					},
+					{
+						"<leader>s",
+						group = "split/search",
+					},
+					{
+						"<leader>t",
+						group = "trouble",
+					},
 
 					-- Navigation
-					{ "H", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
-					{ "L", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
-					{ "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
-					{ "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+					{
+						"H",
+						"<cmd>BufferLineCyclePrev<cr>",
+						desc = "Prev Buffer",
+					},
+					{
+						"L",
+						"<cmd>BufferLineCycleNext<cr>",
+						desc = "Next Buffer",
+					},
+					{
+						"[b",
+						"<cmd>BufferLineCyclePrev<cr>",
+						desc = "Prev Buffer",
+					},
+					{
+						"]b",
+						"<cmd>BufferLineCycleNext<cr>",
+						desc = "Next Buffer",
+					},
 
 					-- Buffer Actions
-					{ "b", group = "buffer actions" },
-					{ "bcl", "<cmd>BufferLineCloseLeft<cr>", desc = "Close Left" },
-					{ "bcr", "<cmd>BufferLineCloseRight<cr>", desc = "Close Right" },
-					{ "bco", "<cmd>BufferLineCloseOthers<cr>", desc = "Close Others" },
-					{ "bcp", "<cmd>BufferLineTogglePin<cr>", desc = "Toggle Pin" },
-					{ "bp", "<cmd>BufferLinePick<cr>", desc = "Pick Buffer" },
+					{
+						"b",
+						group = "buffer actions",
+					},
+					{
+						"bcl",
+						"<cmd>BufferLineCloseLeft<cr>",
+						desc = "Close Left",
+					},
+					{
+						"bcr",
+						"<cmd>BufferLineCloseRight<cr>",
+						desc = "Close Right",
+					},
+					{
+						"bco",
+						"<cmd>BufferLineCloseOthers<cr>",
+						desc = "Close Others",
+					},
+					{
+						"bcp",
+						"<cmd>BufferLineTogglePin<cr>",
+						desc = "Toggle Pin",
+					},
+					{
+						"bp",
+						"<cmd>BufferLinePick<cr>",
+						desc = "Pick Buffer",
+					},
 
 					-- Flash & Windows
-					{ "s", group = "flash/window" },
+					{
+						"s",
+						group = "flash/window",
+					},
 					{
 						"s",
 						function()
@@ -151,17 +217,43 @@ return {
 						end,
 						desc = "Flash Treesitter",
 					},
-					{ "sj", "<C-w>j", desc = "Window Down" },
-					{ "sk", "<C-w>k", desc = "Window Up" },
-					{ "sl", "<C-w>l", desc = "Window Right" },
+					{
+						"sj",
+						"<C-w>j",
+						desc = "Window Down",
+					},
+					{
+						"sk",
+						"<C-w>k",
+						desc = "Window Up",
+					},
+					{
+						"sl",
+						"<C-w>l",
+						desc = "Window Right",
+					},
 
 					-- Explorer Mappings
-					{ "fe", group = "explorer" },
-					{ "fe", "<cmd>NvimTreeFocus<cr>", desc = "Focus Tree" },
+					{
+						"fe",
+						group = "explorer",
+					},
+					{
+						"fe",
+						"<cmd>NvimTreeFocus<cr>",
+						desc = "Focus Tree",
+					},
 
 					-- Editing
-					{ "ri", group = "replace" },
-					{ "riw", "viwP", desc = "Replace Inner Word" },
+					{
+						"ri",
+						group = "replace",
+					},
+					{
+						"riw",
+						"viwP",
+						desc = "Replace Inner Word",
+					},
 					{
 						"ri",
 						function()
@@ -171,9 +263,22 @@ return {
 						desc = "Replace Inside Char",
 						icon = "",
 					},
-					{ "cd", "yyPj", desc = "Clone Line Down" },
-					{ "ch", "<cmd>noh<cr>", desc = "Clear Highlights" },
-					{ ";", ":", desc = "Command Mode", nowait = true },
+					{
+						"cd",
+						"yyPj",
+						desc = "Clone Line Down",
+					},
+					{
+						"ch",
+						"<cmd>noh<cr>",
+						desc = "Clear Highlights",
+					},
+					{
+						";",
+						":",
+						desc = "Command Mode",
+						nowait = true,
+					},
 
 					-- LSP Base
 					{
@@ -185,7 +290,11 @@ return {
 					},
 
 					-- Leader Mappings
-					{ "<leader>bcc", "<cmd>bdelete<cr>", desc = "Close Buffer" },
+					{
+						"<leader>bcc",
+						"<cmd>bdelete<cr>",
+						desc = "Close Buffer",
+					},
 					{
 						"<leader>ca",
 						function()
@@ -201,10 +310,26 @@ return {
 						expr = true,
 						desc = "Rename (IncRename)",
 					},
-					{ "<leader>fe", "<cmd>NvimTreeToggle<cr>", desc = "Toggle Explorer" },
-					{ "<leader>ff", "<cmd>FzfLua files<cr>", desc = "Find Files" },
-					{ "<leader>fg", "<cmd>FzfLua live_grep_native<cr>", desc = "Live Grep" },
-					{ "<leader>fr", "<cmd>FzfLua resume<cr>", desc = "Resume Fzf" },
+					{
+						"<leader>fe",
+						"<cmd>NvimTreeToggle<cr>",
+						desc = "Toggle Explorer",
+					},
+					{
+						"<leader>ff",
+						"<cmd>FzfLua files<cr>",
+						desc = "Find Files",
+					},
+					{
+						"<leader>fg",
+						"<cmd>FzfLua live_grep_native<cr>",
+						desc = "Live Grep",
+					},
+					{
+						"<leader>fr",
+						"<cmd>FzfLua resume<cr>",
+						desc = "Resume Fzf",
+					},
 					{
 						"<leader>oi",
 						function()
@@ -230,10 +355,26 @@ return {
 						end,
 						desc = "Search & Replace (Grug)",
 					},
-					{ "<leader>ss", "<cmd>split<cr>", desc = "Split Horizontal" },
-					{ "<leader>sv", "<cmd>vsplit<cr>", desc = "Split Vertical" },
-					{ "<leader>sh", "<C-w>h", desc = "Window Left" },
-					{ "<leader>tro", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics" },
+					{
+						"<leader>ss",
+						"<cmd>split<cr>",
+						desc = "Split Horizontal",
+					},
+					{
+						"<leader>sv",
+						"<cmd>vsplit<cr>",
+						desc = "Split Vertical",
+					},
+					{
+						"<leader>sh",
+						"<C-w>h",
+						desc = "Window Left",
+					},
+					{
+						"<leader>tro",
+						"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+						desc = "Buffer Diagnostics",
+					},
 					{
 						"<leader>as",
 						function()
@@ -269,8 +410,31 @@ return {
 						end,
 						desc = "Mark last commit files as `review`",
 					},
-					{ "<leader>nd", "<cmd>Noice dismiss<cr>", desc = "Dismiss Notifications" },
-					{ "<leader>l", "<cmd>Lazy<cr>", desc = "Lazy", icon = "💤" },
+					{
+						"<leader>ad",
+						function()
+							require("custom.audit").clear_file_history()
+						end,
+						desc = "Clear current file audit history",
+					},
+					{
+						"<leader>ax",
+						function()
+							require("custom.audit").clean_orphans()
+						end,
+						desc = "Remove orphaned audit entries",
+					},
+					{
+						"<leader>nd",
+						"<cmd>Noice dismiss<cr>",
+						desc = "Dismiss Notifications",
+					},
+					{
+						"<leader>l",
+						"<cmd>Lazy<cr>",
+						desc = "Lazy",
+						icon = "💤",
+					},
 				},
 			},
 		},
