@@ -199,7 +199,7 @@ function M.filter()
 end
 
 function M.bulk_set_as_pending()
-	if vim.fn.confirm("Mark all project files as `pending`?", "&Yes\n&No", 2) ~= 1 then
+	if vim.fn.confirm("Mark untracked files as `pending`?", "&Yes\n&No", 2) ~= 1 then
 		return
 	end
 
@@ -211,10 +211,13 @@ function M.bulk_set_as_pending()
 		return
 	end
 
+	local path = utils.path(root)
+	local database = utils.read(path)
+
 	local files = {}
 
 	for line in process:lines() do
-		if line ~= "" then
+		if line ~= "" and not database[line] then
 			table.insert(files, line)
 		end
 	end
