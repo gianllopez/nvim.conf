@@ -199,12 +199,12 @@ function M.filter()
 end
 
 function M.bulk_set_as_pending()
-	if vim.fn.confirm("Mark untracked files as `pending`?", "&Yes\n&No", 2) ~= 1 then
+	if vim.fn.confirm("Mark unaudited files as `pending`?", "&Yes\n&No", 2) ~= 1 then
 		return
 	end
 
 	local root = utils.root()
-	local process = io.popen("git -C " .. vim.fn.shellescape(root) .. " ls-files")
+	local process = io.popen("git -C " .. vim.fn.shellescape(root) .. " ls-files --cached --others --exclude-standard")
 
 	if not process then
 		vim.notify("Could not list project files, is this a git repository?", vim.log.levels.ERROR, { title = "Audit" })
