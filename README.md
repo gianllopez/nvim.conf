@@ -23,32 +23,3 @@ Complete the steps below to clone and configure the project.
 ```bash
 $ git clone https://github.com/gianllopez/neovim.conf ~/.config/nvim
 ```
-
-### 3. Install `starship` (optional)
-
-```bash
-$ curl -sS https://starship.rs/install.sh | sh
-```
-
-### 3. Configure `starship` (optional)
-
-```bash
-$ vim ~/.config/starship.toml
-```
-
-And paste the following configuration:
-
-```toml
-add_newline = false
-
-format = "$directory$git_branch$git_status$python-> "
-
-[python]
-format = "(and \\[$virtualenv\\] )"
-
-[battery]
-disabled = true
-
-[line_break]
-disabled = true
-```
