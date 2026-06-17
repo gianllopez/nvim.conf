@@ -29,6 +29,7 @@ return {
 				"typescript",
 				"tsx",
 				"html",
+				"astro",
 				"htmldjango",
 				"css",
 				"scss",
