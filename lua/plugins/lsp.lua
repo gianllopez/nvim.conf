@@ -13,13 +13,14 @@ return {
 				"williamboman/mason.nvim",
 				opts = {
 					ensure_installed = {
-						"lua-language-server",
-						"pyright", -- Type checking for Python
-						"ruff", -- Linter/Formatter for Python
-						"vtsls", -- Advanced TypeScript wrapper
+						"astro-language-server",
 						"eslint-lsp",
-						"tailwindcss-language-server",
+						"lua-language-server",
+						"pyright",
+						"ruff",
 						"somesass-language-server",
+						"tailwindcss-language-server",
+						"vtsls",
 					},
 				},
 			},
@@ -37,6 +38,15 @@ return {
 		},
 		opts = {
 			servers = {
+				astro = {
+					init_options = {
+						typescript = {
+							tsdk = vim.fn.stdpath("data")
+								.. "/mason/packages/astro-language-server/node_modules/typescript/lib",
+						},
+					},
+				},
+				eslint = {},
 				lua_ls = {
 					settings = {
 						Lua = {
@@ -44,7 +54,6 @@ return {
 						},
 					},
 				},
-				ruff = {},
 				pyright = {
 					settings = {
 						pyright = {
@@ -52,10 +61,10 @@ return {
 						},
 					},
 				},
-				vtsls = {},
-				eslint = {},
-				tailwindcss = {},
+				ruff = {},
 				somesass_ls = {},
+				tailwindcss = {},
+				vtsls = {},
 			},
 		},
 		config = function(_, opts)
